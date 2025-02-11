@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect maar</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: url('images/map.jpg') no-repeat center center/cover;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+    }
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 900px;
+    }
+    .text-content {
+      max-width: 400px;
+    }
+    p {
+      white-space: pre-line; /* Ensures text maintains line breaks as entered */
+      font-size: 16px;
+      margin: 0;
+    }
+    input[type="text"] {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border: 2px solid #4caf50;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    img {
+      display: none;
+      margin-top: 20px;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="text-content">
+      <h1>India</h1>
+      <p>
+pathar maar - idli sambar  
+child marriage - momo mami - kannada mathadu sule  
+momo mama - jalebi fafda - party party! - 1234 get on the dance floor  
+pani ki kami - party nashe! - nigga pani
+      </p>
+    </div>
+    <div class="form-content">
+      <input type="text" id="user-input" placeholder="Enter code here...">
+      <button onclick="checkCode()">Submit</button>
+      <img id="photo" src="images/invalid.jpg" alt="Error Photo">
+    </div>
+  </div>
+
+  <script>
+    function checkCode() {
+      const userInput = document.getElementById("user-input").value.trim();
+      const photo = document.getElementById("photo");
+
+      if (userInput === "17CL" || userInput === "17cl") {
+        // Redirect to pay.html if code is correct
+        window.location.href = "pay.html";
+      } else {
+        // Show error photo for 10 seconds and reset
+        photo.style.display = "block";
+        setTimeout(() => {
+          photo.style.display = "none";
+          document.getElementById("user-input").value = ""; // Clear input box
+        }, 10000);
+      }
+    }
+  </script>
+</body>
+</html>

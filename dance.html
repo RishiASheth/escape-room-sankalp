@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dance Time</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #1e1e2f;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    video {
+      margin-top: 20px;
+      width: 80%;
+      max-width: 640px;
+      border: 2px solid white;
+      border-radius: 10px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h1>It's Dance Time! 🎉</h1>
+  <p>DANCE FOR 30 SECONDS TO GET NEXT CLUE MAKE SURE ALL DANCE AND LIGHT IS POINTED AT YOU.</p>
+
+  <video id="video" autoplay muted></video>
+  <audio id="background-audio" src="audio/dance.mp3" loop></audio>
+  <button id="record-button" disabled>Recording...</button>
+
+  <script>
+    const video = document.getElementById('video');
+    const backgroundAudio = document.getElementById('background-audio');
+    const recordButton = document.getElementById('record-button');
+
+    let mediaRecorder;
+    let recordedChunks = [];
+
+    // Request access to the user's camera and microphone
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        video.srcObject = stream;
+
+        // Combine background audio with the video stream
+        const audioStream = backgroundAudio.captureStream();
+        const mixedStream = new MediaStream([...stream.getTracks(), ...audioStream.getTracks()]);
+
+        // Prepare the MediaRecorder
+        mediaRecorder = new MediaRecorder(mixedStream);
+        mediaRecorder.ondataavailable = (event) => {
+          if (event.data.size > 0) {
+            recordedChunks.push(event.data);
+          }
+        };
+        mediaRecorder.onstop = saveVideo;
+
+        // Start recording after 3 seconds
+        setTimeout(() => {
+          recordButton.textContent = "Recording...";
+          recordButton.disabled = true;
+          recordedChunks = []; // Clear previous recordings
+          backgroundAudio.play(); // Play the background song
+          mediaRecorder.start();
+
+          // Stop recording after 30 seconds
+          setTimeout(() => {
+            mediaRecorder.stop();
+            backgroundAudio.pause(); // Stop the song
+            recordButton.textContent = "Recording Finished!";
+          }, 30000);
+        }, 3000);
+      } catch (error) {
+        console.error("Error accessing camera:", error);
+        alert("Could not access your camera. Please allow camera permissions.");
+      }
+    }
+
+    // Save the recorded video
+    function saveVideo() {
+      const blob = new Blob(recordedChunks, { type: "video/webm" });
+      const url = URL.createObjectURL(blob);
+
+      // Create a download link
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'dance-video.webm';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // Show a message and reload the page
+      setTimeout(() => {
+        alert("Recording complete! Reloading to record again...");
+        window.location.href = 'map.html'; // Redirect to map.html after reloading
+      }, 2000);
+    }
+
+    // Start the camera when the page loads
+    window.onload = startCamera;
+  </script>
+</body>
+</html>

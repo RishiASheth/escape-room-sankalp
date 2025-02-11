@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pes bhai</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('bg.jpg') no-repeat center center/cover;
+      color: rgb(0, 0, 0);
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #code-input-container {
+      position: absolute;
+      bottom: 50px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    #response-text, #invalid-code-section {
+      display: none;
+      margin-top: 20px;
+    }
+    #invalid-code-section img {
+      max-width: 300px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>FREE FALL</h1>
+  <p>College ke naam pe trauma hai</p>
+  <audio autoplay loop>
+    <source src="audio/muslim.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Input Section -->
+  <div id="code-input-container">
+    <input id="code-input" type="text" placeholder="Enter code here">
+    <button id="submit-code">Submit</button>
+  </div>
+
+  <!-- Response Text -->
+  <div id="response-text">
+    <p>You entered a special code: <strong>uwu</strong>. Enjoy the surprise!</p>
+  </div>
+
+  <!-- Invalid Code Section -->
+  <div id="invalid-code-section">
+    <p>che che itna nahi ata:</p>
+    <img src="images/invalid.jpg" alt="Invalid code picture">
+  </div>
+
+  <script src="214236.js"></script>
+</body>
+</html>

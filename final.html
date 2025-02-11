@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>team me hai</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: url("images/final-bg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      margin-bottom: 20px;
+      color: black
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff4500;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff6347;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ek bevda he khol payega</h1>
+  <input type="text" id="codeInput" placeholder="Enter the code">
+  <button onclick="checkCode()">Submit</button>
+
+  <script>
+    function checkCode() {
+      const input = document.getElementById("codeInput").value.trim();
+      const validCodes = ["YATIK", "yatik", "Yatik"];
+      if (validCodes.includes(input)) {
+        window.location.href = "escaped.html";
+      } else {
+        alert("Wrong code! Try again.");
+      }
+    }
+  </script>
+</body>
+</html>
