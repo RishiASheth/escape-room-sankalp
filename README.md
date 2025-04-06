@@ -5,7 +5,7 @@ Designed a semi-online escape room for an organization named **Sankalp**, featur
 
 ---
 
-## Website - escape-room-sankalp.vercel.app
+## Website - [escape-room-sankalp.vercel.app](https://escape-room-sankalp.vercel.app/)
 
 ## 🔍 Steps to Solve the Escape Room
 
